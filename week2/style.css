@@ -57,6 +57,9 @@ nav a {
 nav a:hover {
     background-color: #505050;  /* Darker shade for hover */
 }
+.active {
+    font-weight: bold; /* Apply your desired style here */
+  }
 
 /* Banner Styles */
 .banner-container {
