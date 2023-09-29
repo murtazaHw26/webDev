@@ -6,11 +6,10 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     color: #505050;
 }
-
 /* Header Styles */
 header {
     background-color: #96ec13;
-    color: #fff;
+    color: black;
     text-align: center;
     padding: 20px;
     position: sticky;
