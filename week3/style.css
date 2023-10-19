@@ -5,6 +5,7 @@ body {
     padding: 0;
     font-family: 'Roboto', Arial, sans-serif;
     color: #505050;
+    background-color: #f2f2f7;
 }
 /* Header Styles */
 header {
@@ -223,7 +224,6 @@ footer p {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
     padding-top: 60px;
 }
@@ -237,7 +237,7 @@ footer p {
     padding: 20px;
     border: 3px solid #000;
     width: 50%;
-    height: 55%;
+    height: 70%;
 }
 
 .close {
@@ -273,13 +273,13 @@ background color, border radius for rounded corners, and font size */
     font-size: 12px;
     }
     /* Style for the form's heading: setting the text color and alignment */
-    #registrationForm h1 {
+#registrationForm h1 {
     color: #0f2027; /* Dark text color for the heading */
     text-align: center; /* Center-align the heading */
     }
     /* Style for the form's button: padding, top margin, full width, text color,
     background color, no border, and rounded corners */
-    #registrationForm button {
+#registrationForm button {
     padding: 10px;
     margin-top: 10px; /* Space above the button */
     width: 100%; /* Make the button expand the full width of the form */
@@ -290,22 +290,24 @@ background color, border radius for rounded corners, and font size */
     border-radius: 4px; /* Rounded corners for the button */
     }
     /* Container for input fields: using flexbox for layout, column direction */
-    .input-control {
+.input-control {
     display: flex;
     flex-direction: column; /* Stack the children (label, input, error message)
     vertically */
     }
     /* Style for input fields inside the container: border style, rounded corners,
     block-level display, font size, padding, full width */
-    .input-control input {
-        border: 2px solid #f0f0f0;
-        border-radius: 4px;
+    .input-control input, #confirmPassword, #password, #email {
+        border: 2px solid grey;
+        border-radius: 8px;
         display: block;
-        font-size: 12px;
+        font-size: 16px;
         padding: 10px;
-        width: 100%; /* Set the width to 100% */
+        width: 100%;
+        height: 40px; /* Set the width to 100% */
         box-sizing: border-box; /* Include padding and border in the element's total width */
     }
+    
     
     /* Remove focus outline from input fields */
     .input-control input:focus {
