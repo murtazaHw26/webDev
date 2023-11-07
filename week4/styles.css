@@ -41,3 +41,6 @@ body {
     background-clip: text;
     margin: 20px 0;
     }
+hr {
+    width: 70%;
+}
