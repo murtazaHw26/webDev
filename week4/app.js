@@ -12,7 +12,7 @@ btn.addEventListener('click', function(){
     if (text == ''){
         alert('Please enter a city name')
     }else {
-        ourRequest.open(`GET`, `https://api.openweathermap.org/data/2.5/forecast?q=${formattedText}&appid=` + apiKey);
+        ourRequest.open('GET', `https://api.openweathermap.org/data/2.5/forecast?q=${formattedText}&appid=` + apiKey);
         ourRequest.onload = function(){
             if (ourRequest.status >= 200 && ourRequest.status < 400) {
                 var ourData = JSON.parse(ourRequest.responseText);
