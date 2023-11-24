@@ -12,7 +12,6 @@ const db = sql.createConnection({
 });
 
 exports.register = async (req, res) => {
-    console.log(req.body);
     const { name, email, password, confirmPassword } = req.body;
 
     try {
@@ -58,7 +57,6 @@ exports.login = async (req, res) => {
             })
         }
         db.query('SELECT * FROM users WHERE email = ?', [email], async (error, result) => {
-            console.log(result);
             if(!result || !(await bcrypt.compare(password, result[0].password))){
                 res.status(400).render('login', {
                     message: 'Email or password is not correct'
@@ -68,13 +66,13 @@ exports.login = async (req, res) => {
                 const token = jwt.sign({id}, process.env.JWT_SECRET, {
                     expiresIn: process.env.JWT_EXPIRES_IN
                 });
-                console.log("The token is: ", token);
                 const cookieOptions = {
                     expires: new Date(
                         Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
                     ),
                     httpOnly: true
                 }
+                console.log("Login invoked")
                 res.cookie('jwt', token, cookieOptions);
                 return res.redirect('/profile');
             }
@@ -85,20 +83,17 @@ exports.login = async (req, res) => {
 };
 
 exports.logout = (req, res) => {
-    res.cookie('jwt', 'logout', {
-        expires: new Date(Date.now() + 2*1000),
-        httpOnly: true
-    });
+    res.clearCookie('jwt');
     res.status(200).redirect('/');
 };
 
+
 exports.isLoggedIn = async (req, res, next) => {
-    console.log("this is the cookies: " , req.cookies);
+    console.log("isLoggedIn invoked")
 
     if (req.cookies.jwt) {
         try {
             const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-            console.log(decoded);
 
             // Promisify the database query
             const queryAsync = promisify(db.query).bind(db);
@@ -109,8 +104,6 @@ exports.isLoggedIn = async (req, res, next) => {
             }
 
             req.user = result[0];
-            console.log("User is:");
-            console.log(req.user);
             return next();
         } catch (error) {
             console.error(error);

@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require('../controllers/auth')
 
 
-router.get('/', (req, res) => {
+router.get('/',authController.isLoggedIn, (req, res) => {
     res.render('index', {
         user: req.user // Pass the user object to the template
     });
@@ -16,9 +16,13 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 router.get('/profile', authController.isLoggedIn, (req, res) => {
-    console.log("this is the user from the req of the profile", req.user)
-    // Route logic for the profile page for authenticated users
-    res.render('profile', { user: req.user }); // req.user contains the user information
+    if(!req.user){
+        res.redirect('login')
+    }
+    else {
+        res.render('profile', { user: req.user });
+    }
+    
 });
 
 module.exports = router;
